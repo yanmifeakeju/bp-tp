@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "test:e2e": "dotenv -e .env cucumber-js -- --require-module @babel/register",
-    "serve": "npm run build && node  -r dotenv/config dist/index.js",
-    "build": "rimraf dist/ && babel src -d dist",
+    "test:e2e": "dotenv -e .env cucumber-js -- --require-module @babel/register --publish-quiet",
+    "serve": "npm run build && node  -r dotenv/config build/index.js",
+    "build": "rimraf build/ && babel src -d build",
     "watch": "nodemon -w src -w index --exec npm run serve",
     "lint": "eslint .",
     "fix": "eslint --fix",
