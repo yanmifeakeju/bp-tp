@@ -4,7 +4,7 @@ import assert from 'assert';
 
 // eslint-disable-next-line no-useless-escape
 When('the client creates a {string} request to users', async function (method) {
-  this.client = superagent(method, `localhost:${process.env.PORT}/users`);
+  this.client = superagent(method, `localhost:${process.env.PORT}/v1/users`);
 });
 
 When('attaches a {string} payload', async function (payloadType) {
@@ -26,6 +26,23 @@ When('attaches a {string} payload', async function (payloadType) {
       break;
   }
   return undefined;
+});
+
+When('attaches a {string} payload which is missng the {string} field', function (_, field) {
+  const payload = {
+    user: {
+      firstName: 'Oladimeji',
+      lastName: 'Oluwayanmife',
+      username: 'yanmz'
+    },
+    email: 'dimeji@emal.com',
+    password: 'password'
+  };
+
+  delete payload[field];
+
+  this.client.set('Content-Type', 'application/json');
+  this.client.send(JSON.stringify(payload));
 });
 
 When('without a {string} header set', function (contentType) {

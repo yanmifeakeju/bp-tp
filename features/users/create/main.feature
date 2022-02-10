@@ -16,4 +16,16 @@ Feature: Create User
       | empty       | 400        | "Payload should not be empty"         |
       | malformed   | 400        | "Payload is not in valid JSON format" |
 
+  Scenario Outline: Bad Request Payload
+    When the client creates a 'POST' request to users
+    And attaches a 'Create User' payload which is missng the <required> field
+    And sends the request
+    Then the API should respond with a 400 HTTP status code
+    And the payload of the response should be a JSON object
+    And contains a message property which says '<message>'
 
+    Examples:
+      | required   | message                          |
+      | 'user'     | The ".user" field is missing     |
+      | 'email'    | The ".email" field is missing    |
+      | 'password' | The ".password" field is missing |
