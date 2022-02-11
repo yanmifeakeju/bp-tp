@@ -3,13 +3,14 @@
     "es2021": true,
     "node": true
   },
-  "extends": ["standard"],
+  "extends": ["airbnb-base"],
   "parserOptions": {
-    "ecmaVersion": "latest",
+    "ecmaVersion": 12,
     "sourceType": "module"
   },
   "rules": {
-    "semi": [2, "always"],
-    "no-console": "error"
+    "comma-dangle": ["error", "never"],
+    "no-use-before-define": ["error", { "functions": false }],
+    "operator-linebreak": "off"
   }
 }

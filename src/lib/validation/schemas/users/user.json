@@ -1,0 +1,21 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "$id": "http://example.com/schemas/users/user.json",
+  "title": "User Schema",
+  "description": "For validating client-provided user object when creating and/orr updating a user",
+  "type": "object",
+
+  "properties": {
+    "firstName": { "type": "string" },
+    "lastName": { "type": "string" },
+    "username": { "type": "string", "maxLength": 30 },
+    "bio": { "type": "string" },
+    "email": {
+      "type": "string",
+      "format": "email"
+    },
+    "password": { "type": "string", "minLength": 8 }
+  },
+  "required": ["firstName", "lastName", "username", "email", "password"],
+  "additionalProperties": false
+}
