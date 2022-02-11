@@ -22,7 +22,7 @@ Feature: General
     And sends the request
     Then the API should respond with a 400 HTTP status code
     And the payload of the response should be a JSON object
-    And contains a message property which says 'The "Content-Type" header must be set for request with a non-empty payload'
+    And contains a message property which says 'The "Content-Type" header is not set'
 
   Scenario: Content-Type header should be set to application/json
     All request which has "Content-Type" header must set its value to contain "application/json"
@@ -32,4 +32,4 @@ Feature: General
     And sends the request
     Then the API should respond with a 415 HTTP status code
     And the payload of the response should be a JSON object
-    And contains a message property which says 'The "Content-Type" header must always be "application/json"'
+    And contains a message property which says '"Content-Type" header is not "application/json"'

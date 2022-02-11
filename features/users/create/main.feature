@@ -12,9 +12,9 @@ Feature: Create User
     And contains a message property which says <message>
 
     Examples:
-      | payloadType | statusCode | message                               |
-      | empty       | 400        | "Payload should not be empty"         |
-      | malformed   | 400        | "Payload is not in valid JSON format" |
+      | payloadType | statusCode | message                       |
+      | empty       | 400        | "Payload should not be empty" |
+      | malformed   | 400        | "Payload is not valid JSON"   |
 
   Scenario Outline: Bad Request Payload
     When the client creates a 'POST' request to users
@@ -22,10 +22,14 @@ Feature: Create User
     And sends the request
     Then the API should respond with a 400 HTTP status code
     And the payload of the response should be a JSON object
-    And contains a message property which says '<message>'
+    And contains a message property which says 'Validation Failed'
+    And an errors array containing the <required> field with a message <message>
+
 
     Examples:
-      | required   | message                          |
-      | 'user'     | The ".user" field is missing     |
-      | 'email'    | The ".email" field is missing    |
-      | 'password' | The ".password" field is missing |
+      | required    | message                                               |
+      | 'firstName' | "The paylaod must have required property 'firstName'" |
+      | 'lastName'  | "The paylaod must have required property 'lastName'"  |
+      | 'username'  | "The paylaod must have required property 'username'"  |
+      | 'email'     | "The paylaod must have required property 'email'"     |
+      | 'password'  | "The paylaod must have required property 'password'"  |
